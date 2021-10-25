@@ -1,7 +1,8 @@
 import sys
 import ProfileClass
+import GameVariates
 
-from PyQt5.QtWidgets import QWidget, QApplication
+from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer
 from PyQt5 import uic
 
@@ -23,6 +24,7 @@ class MainMenuInit(QWidget):
         # self.btn_Play; self.btn_Settings; self.btn_Profile;
 
         self.btn_play.clicked.connect(self.AnimationOn)
+        self.btn_play.clicked.connect(self.GamesClicked)
 
         self.btn_settings.clicked.connect(self.AnimationOn)
 
@@ -55,6 +57,11 @@ class MainMenuInit(QWidget):
     def ProfileClicked(self):
         self.profile = ProfileClass.ProfileClass()
         self.profile.show()
+        self.hide()
+
+    def GamesClicked(self):
+        self.games = GameVariates.GameVariates()
+        self.games.show()
         self.hide()
 
 

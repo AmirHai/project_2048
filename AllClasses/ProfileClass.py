@@ -1,6 +1,6 @@
 import sys
 
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import *
 from PyQt5 import uic
 
 
@@ -11,7 +11,7 @@ class ProfileClass(QWidget):
         self.SetAllSettings()
 
     def SetAllSettings(self):
-        self.setWindowTitle('Профиль игрока - 2048')
+        self.setWindowTitle('2048 - Профиль игрока')
         self.setFixedHeight(800)
         self.setFixedWidth(600)
 
