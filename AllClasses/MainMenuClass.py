@@ -1,4 +1,5 @@
 import sys
+import ProfileClass
 
 from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtCore import QTimer
@@ -21,9 +22,14 @@ class MainMenuInit(QWidget):
         # все виджеты в окне, чисто чтобы не путать
         # self.btn_Play; self.btn_Settings; self.btn_Profile;
 
-        self.btn_Play.clicked.connect(self.AnimationOn)
-        self.btn_Settings.clicked.connect(self.AnimationOn)
-        self.btn_Profile.clicked.connect(self.AnimationOn)
+        self.btn_play.clicked.connect(self.AnimationOn)
+
+        self.btn_settings.clicked.connect(self.AnimationOn)
+
+        self.btn_profile.clicked.connect(self.AnimationOn)
+        self.btn_profile.clicked.connect(self.ProfileClicked)
+
+        self.btn_design.clicked.connect(self.AnimationOn)
 
     def AnimationOn(self):
         # анимация кнопки при нажатии
@@ -45,6 +51,11 @@ class MainMenuInit(QWidget):
                                             border-width: 2px;
                                             border-radius: 15px;''')
         self.animate_widget = None
+
+    def ProfileClicked(self):
+        self.profile = ProfileClass.ProfileClass()
+        self.profile.show()
+        self.hide()
 
 
 def except_hook(cls, exception, traceback):
