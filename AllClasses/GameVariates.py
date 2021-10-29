@@ -1,4 +1,5 @@
 import sys
+import GamingProcess
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
@@ -23,6 +24,8 @@ class GameVariates(QWidget):
         self.btn_back.clicked.connect(self.ButtonBackOn)
         self.btn_back.clicked.connect(self.GoBackPress)
 
+        self.btn_play_game.clicked.connect(self.StartGaming)
+
     def ButtonBackOn(self):
         self.animate_widget = self.sender()
         self.animate_widget.setIcon(QIcon('../AllPictures/GoBackPressed.png'))
@@ -34,6 +37,11 @@ class GameVariates(QWidget):
 
     def GoBackPress(self):
         pass
+
+    def StartGaming(self):
+        self.gaming = GamingProcess.GameProcess()
+        self.gaming.show()
+        self.hide()
 
 
 def except_hook(cls, exception, traceback):
