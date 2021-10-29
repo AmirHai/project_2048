@@ -3,7 +3,7 @@ import random
 
 from PyQt5.QtWidgets import *
 # from PyQt5.QtGui import *
-# from PyQt5.QtCore import *
+from PyQt5.QtCore import Qt
 from PyQt5 import uic
 
 COLORS_IN_BLOCKS = ['eee4da', 'ede0c8', 'f2b179', 'f59563',
@@ -53,6 +53,7 @@ class GameProcess(QWidget):
         self.koords = [random.randint(0, 3) for _ in range(2)]
 
         self.all_blocks = []
+        self.all_buttons = []
 
         for i in range(4):
             self.all_blocks.append([])
@@ -70,26 +71,43 @@ class GameProcess(QWidget):
 
     # это показывание нашего поля со всеми значениями, записанную специально в отдельную функцию
     def ShowField(self):
+        self.all_buttons.clear()
         for i in range(4):
             for j in range(4):
-                but = QPushButton(self.frame_with_buts)
+                self.all_buttons.append(QPushButton(self.frame_with_buts))
                 self.pointSize = 25
                 self.fontD = self.font()
                 self.fontD.setPointSize(self.pointSize)
-                but.setFont(self.fontD)
-                but.setText(self.all_blocks[i][j])
-                but.resize(125, 125)
-                but.move(135 * i + 10, 135 * j + 10)
+                self.all_buttons[-1].setFont(self.fontD)
+                self.all_buttons[-1].setText(self.all_blocks[i][j])
+                self.all_buttons[-1].resize(125, 125)
+                self.all_buttons[-1].move(135 * i + 10, 135 * j + 10)
 
                 if self.all_blocks[i][j] == ' ':
-                    but.setStyleSheet(f'''background-color: rgb(200, 200, 200);
+                    self.all_buttons[-1].setStyleSheet(f'''background-color: rgb(200, 200, 200);
                     border-radius: 15px;
                     ''')
                 else:
-                    but.setStyleSheet(f'''background-color: #{COLORS_IN_BLOCKS[sqrOfTwo(self.all_blocks[i][j]) - 1]};
+                    self.all_buttons[-1].setStyleSheet(
+                        f'''background-color: #{COLORS_IN_BLOCKS[sqrOfTwo(self.all_blocks[i][j]) - 1]};
                                         color: #{COLORS_OF_TEXT[TextColorChoose(self.all_blocks[i][j])]};
                                         border-radius: 15px;
                                         ''')
+        print('rrr')
+
+    # пока что тут очень много багов, изза чего программа плохо работает.
+    # возможно у меня получится исправить их к след понедельнику
+    def keyPressEvent(self, event):
+        if event.nativeVirtualKey() == Qt.Key_A:
+            print('qqq')
+            print(*self.all_blocks)
+            for i in range(4):
+                for j in range(3):
+                    if self.all_blocks[i][j] == ' ':
+                        self.all_blocks[i][j] = self.all_blocks[i][j + 1]
+                        self.all_blocks[i][j + 1] = ' '
+            print(*self.all_blocks)
+            self.ShowField()
 
 
 def except_hook(cls, exception, traceback):
