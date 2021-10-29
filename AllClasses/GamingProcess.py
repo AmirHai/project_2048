@@ -133,6 +133,7 @@ class GameProcess(QWidget):
                 if self.all_blocks[i][j + 1] == self.all_blocks[i][j] and self.all_blocks[i][j] != ' ':
                     self.all_blocks[i][j + 1] = str(int(self.all_blocks[i][j + 1]) + int(self.all_blocks[i][j]))
                     self.all_blocks[i][j] = ' '
+                    self.Points += int(self.all_blocks[i][j + 1])
                     catchDifferents = True
         for _ in range(4):
             for i in range(4):
@@ -143,6 +144,7 @@ class GameProcess(QWidget):
                         catchDifferents = True
         if catchDifferents:
             AddNewNumber(self.all_blocks)
+        self.lcdn_now_points.display(self.Points)
         self.ShowField()
 
     def sClickedEvent(self):
@@ -159,6 +161,7 @@ class GameProcess(QWidget):
                 if self.all_blocks[i][j - 1] == self.all_blocks[i][j] and self.all_blocks[i][j] != ' ':
                     self.all_blocks[i][j - 1] = str(int(self.all_blocks[i][j - 1]) + int(self.all_blocks[i][j]))
                     self.all_blocks[i][j] = ' '
+                    self.Points += int(self.all_blocks[i][j - 1])
                     catchDifferents = True
         for _ in range(4):
             for i in range(4):
@@ -169,6 +172,7 @@ class GameProcess(QWidget):
                         catchDifferents = True
         if catchDifferents:
             AddNewNumber(self.all_blocks)
+        self.lcdn_now_points.display(self.Points)
         self.ShowField()
 
     def aClickedEvent(self):
@@ -185,6 +189,7 @@ class GameProcess(QWidget):
                 if self.all_blocks[i + 1][j] == self.all_blocks[i][j] and self.all_blocks[i][j] != ' ':
                     self.all_blocks[i + 1][j] = str(int(self.all_blocks[i + 1][j]) + int(self.all_blocks[i][j]))
                     self.all_blocks[i][j] = ' '
+                    self.Points += int(self.all_blocks[i + 1][j])
                     catchDifferents = True
         for _ in range(4):
             for i in range(3, 0, -1):
@@ -195,6 +200,7 @@ class GameProcess(QWidget):
                         catchDifferents = True
         if catchDifferents:
             AddNewNumber(self.all_blocks)
+        self.lcdn_now_points.display(self.Points)
         self.ShowField()
 
     def dClickedEvent(self):
@@ -211,6 +217,7 @@ class GameProcess(QWidget):
                 if self.all_blocks[i - 1][j] == self.all_blocks[i][j] and self.all_blocks[i][j] != ' ':
                     self.all_blocks[i - 1][j] = str(int(self.all_blocks[i - 1][j]) + int(self.all_blocks[i][j]))
                     self.all_blocks[i][j] = ' '
+                    self.Points += int(self.all_blocks[i - 1][j])
                     catchDifferents = True
         for _ in range(4):
             for i in range(3):
@@ -221,8 +228,21 @@ class GameProcess(QWidget):
                         catchDifferents = True
         if catchDifferents:
             AddNewNumber(self.all_blocks)
+        self.lcdn_now_points.display(self.Points)
         self.ShowField()
 
+    def EndGamingEvent(self, differents):
+        AllClosed = True
+        for i in range(4):
+            for j in range(4):
+                if self.all_blocks[i][j] == ' ':
+                    AllClosed = False
+                    break
+            if not AllClosed:
+                break
+        if AllClosed and not differents:
+            pass
+            # newGame = QDialog(self, 'new game', )
 
 def except_hook(cls, exception, traceback):
     sys.__excepthook__(cls, exception, traceback)
