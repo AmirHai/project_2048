@@ -2,6 +2,7 @@ import sys
 
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
+from AllConstants import *
 
 
 class ProfileClass(QWidget):
@@ -12,8 +13,8 @@ class ProfileClass(QWidget):
 
     def SetAllSettings(self):
         self.setWindowTitle('2048 - Профиль игрока')
-        self.setFixedHeight(800)
-        self.setFixedWidth(600)
+        self.setFixedWidth(XWINDOWSIZE)
+        self.setFixedHeight(YWINDOWSIZE)
 
 
 def except_hook(cls, exception, traceback):

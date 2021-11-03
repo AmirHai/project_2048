@@ -1,10 +1,10 @@
-import sys
 import ProfileClass
 import GameVariates
 
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import QTimer
 from PyQt5 import uic
+from AllConstants import *
 
 RADIUS_OFF_WIDGETS = 5
 
@@ -18,8 +18,8 @@ class MainMenuInit(QWidget):
     def GetAllWidgets(self):
         uic.loadUi('../AllActivities/MainMenu.ui', self)
         self.setWindowTitle('2048 - главное окно')
-        self.setFixedWidth(600)
-        self.setFixedHeight(800)
+        self.setFixedWidth(XWINDOWSIZE)
+        self.setFixedHeight(YWINDOWSIZE)
         # все виджеты в окне, чисто чтобы не путать
         # self.btn_Play; self.btn_Settings; self.btn_Profile;
 
@@ -64,14 +64,3 @@ class MainMenuInit(QWidget):
         self.games.show()
         self.hide()
 
-
-def except_hook(cls, exception, traceback):
-    sys.__excepthook__(cls, exception, traceback)
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    game = MainMenuInit()
-    game.show()
-    sys.excepthook = except_hook
-    sys.exit(app.exec_())

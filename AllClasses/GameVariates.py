@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5 import uic
+from AllConstants import *
 
 
 class GameVariates(QWidget):
@@ -12,34 +13,36 @@ class GameVariates(QWidget):
         super().__init__()
         uic.loadUi('../AllActivities/GameVariates.ui', self)
         self.SetAllSettings()
+        self.x_Size = XFRAMESIZE
+        self.y_Size = YFRAMESIZE
         self.animate_widget = None
 
     def SetAllSettings(self):
         self.setWindowTitle('2048 - Запуск Игры')
-        self.setFixedHeight(800)
-        self.setFixedWidth(600)
+        self.setFixedWidth(XWINDOWSIZE)
+        self.setFixedHeight(YWINDOWSIZE)
+
 
         self.btn_back.setIcon(QIcon('../AllPictures/GoBack.png'))
-        self.btn_back.setIconSize(QSize(70, 70))
-        self.btn_back.clicked.connect(self.ButtonBackOn)
+        self.btn_back.setIconSize(QSize(BUTTONSINGAME, BUTTONSINGAME))
         self.btn_back.clicked.connect(self.GoBackPress)
 
         self.btn_play_game.clicked.connect(self.StartGaming)
 
-    def ButtonBackOn(self):
-        self.animate_widget = self.sender()
-        self.animate_widget.setIcon(QIcon('../AllPictures/GoBackPressed.png'))
-        QTimer.singleShot(100, self.ButtonBackOff)
+        self.X_size_of_frame.valueChanged.connect(self.XSliderMoved)
+        self.Y_size_of_frame.valueChanged.connect(self.YSliderMoved)
 
-    def ButtonBackOff(self):
-        self.animate_widget.setIcon(QIcon('../AllPictures/GoBack.png'))
-        self.animate_widget = None
+    def XSliderMoved(self):
+        self.x_Size = self.X_size_of_frame.value()
+
+    def YSliderMoved(self):
+        self.y_Size = self.Y_size_of_frame.value()
 
     def GoBackPress(self):
         pass
 
     def StartGaming(self):
-        self.gaming = GamingProcess.GameProcess()
+        self.gaming = GamingProcess.GameProcess(self.x_Size, self.y_Size)
         self.gaming.show()
         self.hide()
 
