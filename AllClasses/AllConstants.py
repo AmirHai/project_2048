@@ -11,3 +11,6 @@ COLORS_IN_BLOCKS = ['eee4da', 'ede0c8', 'f2b179', 'f59563',
                     'f67c5f', 'f65e3b', 'edcf72', 'edcc61',
                     'edc850', 'edc53f', 'edc22e']
 COLORS_OF_TEXT = ['776e65', 'f9f6f2']
+XREGISTRSIZE = 400
+YREGISTRSIZE = 500
+
