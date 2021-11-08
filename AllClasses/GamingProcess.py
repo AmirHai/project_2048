@@ -47,10 +47,11 @@ def AddNewNumber(allNumbs):
 
 
 class GameProcess(QWidget):
-    def __init__(self, x, y):
+    def __init__(self, x, y, login):
         super().__init__()
         uic.loadUi('../AllActivities/Game.ui', self)
         self.Points = 0
+        self.login = login
         self.xSize = x
         self.ySize = y
         self.createWindow()

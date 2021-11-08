@@ -9,8 +9,9 @@ from AllConstants import *
 
 
 class GameVariates(QWidget):
-    def __init__(self):
+    def __init__(self, login):
         super().__init__()
+        self.login = login
         uic.loadUi('../AllActivities/GameVariates.ui', self)
         self.SetAllSettings()
         self.x_Size = XFRAMESIZE
@@ -42,7 +43,7 @@ class GameVariates(QWidget):
         pass
 
     def StartGaming(self):
-        self.gaming = GamingProcess.GameProcess(self.x_Size, self.y_Size)
+        self.gaming = GamingProcess.GameProcess(self.x_Size, self.y_Size, self.login)
         self.gaming.show()
         self.hide()
 

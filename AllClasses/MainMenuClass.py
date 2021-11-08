@@ -10,10 +10,12 @@ RADIUS_OFF_WIDGETS = 5
 
 
 class MainMenuInit(QWidget):
-    def __init__(self):
+    def __init__(self, login):
         super().__init__()
         self.animate_widget = None
+        self.login = login
         self.GetAllWidgets()
+
 
     def GetAllWidgets(self):
         uic.loadUi('../AllActivities/MainMenu.ui', self)
@@ -55,12 +57,12 @@ class MainMenuInit(QWidget):
         self.animate_widget = None
 
     def ProfileClicked(self):
-        self.profile = ProfileClass.ProfileClass()
+        self.profile = ProfileClass.ProfileClass(self.login)
         self.profile.show()
         self.hide()
 
     def GamesClicked(self):
-        self.games = GameVariates.GameVariates()
+        self.games = GameVariates.GameVariates(self.login)
         self.games.show()
         self.hide()
 

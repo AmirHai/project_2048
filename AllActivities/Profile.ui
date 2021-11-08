@@ -86,7 +86,12 @@
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(180, 180, 180)</string>
+background-color: rgb(180, 180, 180);
+border-radius: 15px;
+border-color: black;
+border-style: outset;
+border-width: 2px;
+border-radius: 15px;</string>
    </property>
    <property name="text">
     <string>AmirHai</string>
@@ -133,7 +138,12 @@ background-color: rgb(180, 180, 180)</string>
    </property>
    <property name="styleSheet">
     <string notr="true">color: rgb(0, 0, 0);
-background-color: rgb(180, 180, 180)</string>
+background-color: rgb(180, 180, 180);
+border-radius: 15px;
+border-color: black;
+border-style: outset;
+border-width: 2px;
+border-radius: 15px;</string>
    </property>
    <property name="text">
     <string>[ADM] администратор</string>
@@ -141,6 +151,51 @@ background-color: rgb(180, 180, 180)</string>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>160</y>
+     <width>100</width>
+     <height>40</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Records:</string>
+   </property>
+  </widget>
+  <widget class="QScrollArea" name="scrollArea_records">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>200</y>
+     <width>560</width>
+     <height>580</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(239, 239, 239)</string>
+   </property>
+   <property name="widgetResizable">
+    <bool>true</bool>
+   </property>
+   <widget class="QWidget" name="scrollAreaWidgetContents">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>558</width>
+      <height>578</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
