@@ -56,14 +56,17 @@ class RegistrationClass(QWidget):
         self.lbl_error_value.setText('')
         query = f''' SELECT * FROM allLogins WHERE login = '{self.ledit_login.text()}' '''
         resourses = self.cursor.execute(query).fetchall()
+        windowOpened = True
         for i in resourses:
             if i[1] == self.ledit_password.text():
                 self.db.close()
                 self.menu = MainMenuClass.MainMenuInit(self.ledit_login.text())
                 self.menu.show()
                 self.hide()
-        errorWindow = QMessageBox()
-        errorWindow.setIcon(QMessageBox.Critical)
-        errorWindow.setWindowTitle("ошибка входа")
-        errorWindow.setText('неверный логин или пароль')
-        errorWindow.exec_()
+                windowOpened = False
+        if windowOpened:
+            errorWindow = QMessageBox()
+            errorWindow.setIcon(QMessageBox.Critical)
+            errorWindow.setWindowTitle("ошибка входа")
+            errorWindow.setText('неверный логин или пароль')
+            errorWindow.exec_()

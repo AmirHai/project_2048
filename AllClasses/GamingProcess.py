@@ -74,6 +74,11 @@ class GameProcess(QWidget):
         self.btn_moveback.setIconSize(QSize(BUTTONSINGAME, BUTTONSINGAME))
         self.btn_moveback.clicked.connect(self.MovingBackEvent)
 
+        #  self.records = \
+        #    open(f'../allCSVFiles/records_{self.login}.csv', encoding='utf8').readlines()
+        # self.rec = self.records[6 * (self.xSize - 3) + self.ySize - 3].split(";")[2]
+        # self.lcdn_record_points.display(int(self.rec))
+
         self.all_blocks = []
         self.moved_blocks = []
         self.all_buttons = []
