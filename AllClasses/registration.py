@@ -36,14 +36,21 @@ class RegistrationClass(QWidget):
             self.menu.show()
             self.hide()
         elif not Opened:
-            self.lbl_error_value.setText('Данный логин уже занят')
+            errorWindow = QMessageBox()
+            errorWindow.setIcon(QMessageBox.Critical)
+            errorWindow.setWindowTitle("ошибка регистрации")
+            errorWindow.setText('данный логин уже занят')
+            errorWindow.exec_()
         else:
-            self.lbl_error_value.setText('Некоррекные данные')
+            errorWindow = QMessageBox()
+            errorWindow.setIcon(QMessageBox.Critical)
+            errorWindow.setWindowTitle("ошибка регистрации")
+            errorWindow.setText('некорректный логин или пароль')
+            errorWindow.exec_()
         query = f''' INSERT INTO profiles (login, status, nickname, bestRecord)
          VALUES('{self.ledit_login.text()}', 'Нет', '{self.ledit_login.text()}', 0) '''
         self.cursor.execute(query)
         self.db.commit()
-
 
     def LoginToGame(self):
         self.lbl_error_value.setText('')
@@ -55,4 +62,8 @@ class RegistrationClass(QWidget):
                 self.menu = MainMenuClass.MainMenuInit(self.ledit_login.text())
                 self.menu.show()
                 self.hide()
-        self.lbl_error_value.setText('неверный логин или пароль')
+        errorWindow = QMessageBox()
+        errorWindow.setIcon(QMessageBox.Critical)
+        errorWindow.setWindowTitle("ошибка входа")
+        errorWindow.setText('неверный логин или пароль')
+        errorWindow.exec_()

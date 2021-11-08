@@ -33,7 +33,6 @@ class MainMenuInit(QWidget):
         self.btn_profile.clicked.connect(self.AnimationOn)
         self.btn_profile.clicked.connect(self.ProfileClicked)
 
-        self.btn_design.clicked.connect(self.AnimationOn)
 
     def AnimationOn(self):
         # анимация кнопки при нажатии

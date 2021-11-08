@@ -29,6 +29,11 @@ class ProfileClass(QWidget):
             for i in range(3, 9):
                 for j in range(3, 9):
                     recordwriting.write(';'.join([str(i), str(j), '0', '\n']))
+        query = f''' SELECT * FROM profiles WHERE login = '{self.login}' '''
+        allrec = self.cursor.execute(query).fetchall()
+        self.ledit_nickname.setText(allrec[0][2])
+        # пока что вашего статуса нету, тк я его еще не добавил в дб
+        self.ledit_status.setText(allrec[0][1])
 
 
 
