@@ -59,10 +59,13 @@ class MainMenuInit(QWidget):
     def ProfileClicked(self):
         self.profile = ProfileClass.ProfileClass(self.login)
         self.profile.show()
-        self.hide()
 
     def GamesClicked(self):
         self.games = GameVariates.GameVariates(self.login)
         self.games.show()
-        self.hide()
+
+    # с будущем все настройки будут добавлены(на самом деле я пока что не придумал что туда добавить)
+    def SettingsClicked(self):
+        self.settings = None
+
 

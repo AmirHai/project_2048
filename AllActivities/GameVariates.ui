@@ -175,15 +175,53 @@ border-radius: 15px;</string>
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="multipleer">
+   <widget class="QWidget" name="widget">
     <attribute name="title">
      <string>Мультиплеер</string>
     </attribute>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>500</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+       <pointsize>19</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>В разработке</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="botpleer">
     <attribute name="title">
      <string>Битва с Ботом</string>
     </attribute>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>500</width>
+       <height>50</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+       <pointsize>19</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>В разработке</string>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>

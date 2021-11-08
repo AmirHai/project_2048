@@ -28,14 +28,8 @@ class ProfileClass(QWidget):
         if len(records.readlines()) == 0:
             for i in range(3, 9):
                 for j in range(3, 9):
-                    recordwriting.write(';'.join([str(i), str(j), '0']))
-        layout = QGridLayout()
-        for i in records.readlines():
-            rec = QLabel(i)
-            layout.addWidget(rec)
-        w = QWidget()
-        w.setLayout(layout)
-        self.scrollArea_records.setWidget(w)
+                    recordwriting.write(';'.join([str(i), str(j), '0', '\n']))
+
 
 
 
