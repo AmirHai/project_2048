@@ -41,6 +41,7 @@ class RegistrationClass(QWidget):
             self.cursor.execute(query)
             self.db.commit()
 
+            # тут происходит запись всех рекордов в игре
             recordwriting = open(f'../allCSVFiles/records_{self.ledit_login.text()}.csv', 'w', encoding='utf8')
             for i in range(3, 9):
                 for j in range(3, 9):
