@@ -35,6 +35,16 @@ class RegistrationClass(QWidget):
             self.menu = MainMenuClass.MainMenuInit(self.ledit_login.text())
             self.menu.show()
             self.hide()
+
+            query = f''' INSERT INTO profiles (login, status, nickname, bestRecord)
+                     VALUES('{self.ledit_login.text()}', 'Нет', '{self.ledit_login.text()}', 0) '''
+            self.cursor.execute(query)
+            self.db.commit()
+
+            recordwriting = open(f'../allCSVFiles/records_{self.ledit_login.text()}.csv', 'w', encoding='utf8')
+            for i in range(3, 9):
+                for j in range(3, 9):
+                    recordwriting.write(';'.join([str(i), str(j), '0', '\n']))
         elif not Opened:
             errorWindow = QMessageBox()
             errorWindow.setIcon(QMessageBox.Critical)
@@ -47,10 +57,7 @@ class RegistrationClass(QWidget):
             errorWindow.setWindowTitle("ошибка регистрации")
             errorWindow.setText('некорректный логин или пароль')
             errorWindow.exec_()
-        query = f''' INSERT INTO profiles (login, status, nickname, bestRecord)
-         VALUES('{self.ledit_login.text()}', 'Нет', '{self.ledit_login.text()}', 0) '''
-        self.cursor.execute(query)
-        self.db.commit()
+
 
     def LoginToGame(self):
         self.lbl_error_value.setText('')

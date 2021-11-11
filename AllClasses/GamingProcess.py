@@ -74,10 +74,9 @@ class GameProcess(QWidget):
         self.btn_moveback.setIconSize(QSize(BUTTONSINGAME, BUTTONSINGAME))
         self.btn_moveback.clicked.connect(self.MovingBackEvent)
 
-        #  self.records = \
-        #    open(f'../allCSVFiles/records_{self.login}.csv', encoding='utf8').readlines()
-        # self.rec = self.records[6 * (self.xSize - 3) + self.ySize - 3].split(";")[2]
-        # self.lcdn_record_points.display(int(self.rec))
+        self.records = open(f'../allCSVFiles/records_{self.login}.csv', encoding='utf8').readlines()
+        self.rec = self.records[6 * (self.xSize - 3) + self.ySize - 3].split(";")[2]
+        self.lcdn_record_points.display(int(self.rec))
 
         self.all_blocks = []
         self.moved_blocks = []
@@ -100,6 +99,15 @@ class GameProcess(QWidget):
 
         self.ShowField()
 
+    def newRecords(self, newRec):
+        allrec = open(f'../allCSVFiles/records_{self.login}.csv', encoding='utf8').readlines()
+        recordwriting = open(f'../allCSVFiles/records_{self.login}.csv', 'w', encoding='utf8')
+        for i in allrec:
+            if i.split(';')[0] == str(self.xSize) and i.split(';')[1] == str(self.ySize):
+                recordwriting.write(';'.join([str(self.xSize), str(self.ySize), str(newRec), '\n']))
+            else:
+                recordwriting.write(i)
+
     # пересоздает поле. убирает данные о прошлом поле и показывает новое
     def returnGame(self):
         self.btn_restartgame.setIcon(QIcon('../AllPictures/return_in_game_pressed.png'))
@@ -112,6 +120,8 @@ class GameProcess(QWidget):
                 self.all_blocks[i].append(' ')
         for _ in range(2):
             AddNewNumber(self.all_blocks)
+        if self.Points > int(self.rec):
+            self.newRecords(self.Points)
         self.Points = 0
         self.lcdn_now_points.display(self.Points)
         self.lbl_endgame.setText('')
@@ -155,6 +165,9 @@ class GameProcess(QWidget):
                                         color: #{COLORS_OF_TEXT[TextColorChoose(self.all_blocks[i][j])]};
                                         border-radius: 15px;
                                         ''')
+        self.records = open(f'../allCSVFiles/records_{self.login}.csv', encoding='utf8').readlines()
+        self.rec = self.records[6 * (self.xSize - 3) + self.ySize - 3].split(";")[2]
+        self.lcdn_record_points.display(int(self.rec))
         self.show()
 
     # пока что тут очень много багов, из-за чего программа плохо работает.
@@ -271,6 +284,7 @@ class GameProcess(QWidget):
             self.btn_restartgame.setIcon(QIcon('../AllPictures/endgame_return.png'))
             self.btn_restartgame.setIconSize(QSize(BUTTONSINGAME, BUTTONSINGAME))
             self.lbl_endgame.setText('Конец игры')
+            self.newRecords(self.Points)
         else:
             self.moved_blocks.clear()
             for i in range(self.xSize):

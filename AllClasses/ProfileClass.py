@@ -24,11 +24,6 @@ class ProfileClass(QWidget):
         self.records = open(f'../allCSVFiles/records_{self.login}.csv', encoding='utf8').readlines()
         # числа 3 и 9 появились из-за того, что это минимальные и максимальные значения размера поля
         # в игре. а все записанные нули это сами рекорды
-        if len(self.records) == 0:
-            recordwriting = open(f'../allCSVFiles/records_{self.login}.csv', 'w', encoding='utf8')
-            for i in range(3, 9):
-                for j in range(3, 9):
-                    recordwriting.write(';'.join([str(i), str(j), '0', '\n']))
         for i in range(3, 9):
             for j in range(3, 9):
                 but = QPushButton(self.btns_allRecords)
