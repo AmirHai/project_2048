@@ -3,6 +3,7 @@ import sqlite3
 
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
+from PyQt5.QtCore import QTimer
 from AllConstants import *
 
 
@@ -30,6 +31,13 @@ class ProfileClass(QWidget):
                 but.move(90 * (i - 3), 90 * (j - 3))
                 but.resize(80, 80)
                 but.setText(f'{i}x{j}')
+                but.setStyleSheet('''background-color: rgb(255, 174, 0, 240);
+                                                            border-radius: 15px;
+                                                            border-color: black;
+                                                            border-style: outset;
+                                                            border-width: 2px;
+                                                            border-radius: 15px;''')
+                but.clicked.connect(self.AnimationOn)
                 but.clicked.connect(self.recordOpened)
         query = f''' SELECT * FROM profiles WHERE login = '{self.login}' '''
         allrec = self.cursor.execute(query).fetchall()
@@ -43,6 +51,27 @@ class ProfileClass(QWidget):
             j = int(self.sender().text()[2])
             self.mass = record.readlines()
             self.lbl_record.setText(f'{i} x {j}: {self.mass[6 * (i - 3) + j - 3].split(";")[2]}')
+
+    def AnimationOn(self):
+        # анимация кнопки при нажатии
+        # при слишком быстром нажатии вылезает ошибка, которая никак не влияет на приложение
+        self.animate_widget = self.sender()
+        self.animate_widget.setStyleSheet('''background-color: rgb(255, 150, 0, 240);
+                                            border-radius: 15px;
+                                            border-color: black;
+                                            border-style: outset;
+                                            border-width: 2px;
+                                            border-radius: 15px;''')
+        QTimer.singleShot(100, self.AnimationOff)
+
+    def AnimationOff(self):
+        self.animate_widget.setStyleSheet('''background-color: rgb(255, 174, 0, 240);
+                                            border-radius: 15px;
+                                            border-color: black;
+                                            border-style: outset;
+                                            border-width: 2px;
+                                            border-radius: 15px;''')
+        self.animate_widget = None
 
 
 def except_hook(cls, exception, traceback):
